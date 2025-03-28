@@ -1,3 +1,9 @@
+<?php
+include('connection.php');
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,30 +14,31 @@
 </head>
 <body>
     <div class="container">
+        <Form action="" method="POST">
         <div class="title">
             Registration Form
 </div>
 <div class="form">
     <div class="input_field">
         <label>First Name</label>
-        <input type="text" class="input">
+        <input type="text" class="input" name="fname">
 </div>
 <div class="input_field">
         <label>Last Name</label>
-        <input type="text" class="input">
+        <input type="text" class="input" name="lname">
 </div>
 <div class="input_field">
         <label>Password</label>
-        <input type="password" class="input">
+        <input type="password" class="input" name="password">
 </div>
 <div class="input_field">
         <label>Confirm Password</label>
-        <input type="password" class="input">
+        <input type="password" class="input" name="conpassword">
 </div>
 <div class="input_field">
         <label>Gender</label>
         <div class="custom_select">
-        <select>
+        <select name="gender">
             <option>Select</option>
             <option>Male</option>
             <option>Female</option>
@@ -39,16 +46,16 @@
 </div>
 </div>
 <div class="input_field">
-        <label>Email</label>
-        <input type="text" class="input">
+        <label>Email Address</label>
+        <input type="text" class="input" name="email">
 </div>
 <div class="input_field">
-        <label>Phone</label>
-        <input type="text" class="input">
+        <label>Phone Number</label>
+        <input type="text" class="input" name="phone">
 </div>
 <div class="input_field">
         <label>Address</label>
-        <textarea class="textarea"></textarea>
+        <textarea class="textarea" name="address"></textarea>
 </div>
 <div class="input_field term">
         <label class="check">
@@ -58,9 +65,28 @@
         <p>Agree to terms and condition</p>
 </div>
 <div class="input_field">
-    <input type="submit" value="register" class="btn">
+    <input type="submit" value="Register" class="btn" name="register">
 </div>
 </div>
+</form>
 </div>
 </body>
 </html>
+
+
+<?php
+
+if($_POST['register'])
+{
+        $fname   = $_POST['fname'];
+        $lname   = $_POST['lname'];
+        $pwd     = $_POST['password'];
+        $cpwd    = $_POST['conpassword'];
+        $gender  = $_POST['gender'];
+        $email   = $_POST['email'];
+        $phone   = $_POST['phone'];
+        $address = $_POST['address'];
+
+}
+
+?>
