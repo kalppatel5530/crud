@@ -1,5 +1,6 @@
 <?php
 include('connection.php');
+// error_reporting(0);
 ?>
 
 
@@ -65,7 +66,7 @@ include('connection.php');
         <p>Agree to terms and condition</p>
 </div>
 <div class="input_field">
-    <input type="submit" value="Register" class="btn" name="register">
+    <input type="submit"  name="register" value="register" class="btn" >
 </div>
 </div>
 </form>
@@ -76,7 +77,7 @@ include('connection.php');
 
 <?php
 
-if($_POST['register'])
+if(isset($_POST['register']))
 {
         $fname   = $_POST['fname'];
         $lname   = $_POST['lname'];
@@ -87,6 +88,15 @@ if($_POST['register'])
         $phone   = $_POST['phone'];
         $address = $_POST['address'];
 
+        $query = "insert into form values('$fname','$lname','$pwd','$cpwd','$gender','$email','$phone','$address')";
+
+        $data = mysqli_query($conn , $query);
+
+        if($data){
+                echo "data inserted succesfully";
+        }else{
+                echo "failed";
+        }
 }
 
 ?>
