@@ -93,7 +93,7 @@ if(isset($_POST['register']))
 
         
 
-        $query = "insert into form values('$fname','$lname','$pwd','$cpwd','$gender','$email','$phone','$address')";
+        $query = "insert into form(fname,lname,password,cpassword,gender,email,phone,address) values('$fname','$lname','$pwd','$cpwd','$gender','$email','$phone','$address')";
 
         $data = mysqli_query($conn , $query);
 
