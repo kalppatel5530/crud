@@ -22,45 +22,45 @@ include('connection.php');
 <div class="form">
     <div class="input_field">
         <label>First Name</label>
-        <input type="text" class="input" name="fname">
+        <input type="text" class="input" name="fname" required>
 </div>
 <div class="input_field">
         <label>Last Name</label>
-        <input type="text" class="input" name="lname">
+        <input type="text" class="input" name="lname" required>
 </div>
 <div class="input_field">
         <label>Password</label>
-        <input type="password" class="input" name="password">
+        <input type="password" class="input" name="password" required>
 </div>
 <div class="input_field">
         <label>Confirm Password</label>
-        <input type="password" class="input" name="conpassword">
+        <input type="password" class="input" name="conpassword" required>
 </div>
 <div class="input_field">
         <label>Gender</label>
         <div class="custom_select">
-        <select name="gender">
-            <option>Select</option>
-            <option>Male</option>
-            <option>Female</option>
+        <select name="gender" required>
+            <option value="">Select</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
         </select>
 </div>
 </div>
 <div class="input_field">
         <label>Email Address</label>
-        <input type="text" class="input" name="email">
+        <input type="text" class="input" name="email" required>
 </div>
 <div class="input_field">
         <label>Phone Number</label>
-        <input type="text" class="input" name="phone">
+        <input type="text" class="input" name="phone" required>
 </div>
 <div class="input_field">
         <label>Address</label>
-        <textarea class="textarea" name="address"></textarea>
+        <textarea class="textarea" name="address" required></textarea>
 </div>
 <div class="input_field term">
         <label class="check">
-            <input type="checkbox">
+            <input type="checkbox" required>
             <span class="checkmark"></span>
         </label>
         <p>Agree to terms and condition</p>
@@ -88,6 +88,11 @@ if(isset($_POST['register']))
         $phone   = $_POST['phone'];
         $address = $_POST['address'];
 
+
+        if($fname !="" && $lname !="" && $pwd !="" && $cpwd !="" && $gender !="" && $email !="" && $phone !="" && $address !=""){
+
+        
+
         $query = "insert into form values('$fname','$lname','$pwd','$cpwd','$gender','$email','$phone','$address')";
 
         $data = mysqli_query($conn , $query);
@@ -97,6 +102,9 @@ if(isset($_POST['register']))
         }else{
                 echo "failed";
         }
+}else{
+        echo "<script>alert('Please Fill The Form')</script>";
+}
 }
 
 ?>
