@@ -22,8 +22,10 @@ error_reporting(0);
 $filename= $_FILES["uploadfile"]["name"];
 $tempname= $_FILES["uploadfile"]["tmp_name"];
 $folder = "images/" .$filename;
-echo $folder;
+// echo $folder;
 move_uploaded_file($tempname, $folder);
 
+echo "<img src='$folder' height='100px' width='100px' >";
 
 ?>
+<!-- <img src="images/tmp_name" height="100px" width="100px"> -->
