@@ -9,6 +9,9 @@ $data = mysqli_query($conn , $query);
 
 $total = mysqli_num_rows($data);
 $result = mysqli_fetch_assoc($data);
+
+$language = $result['language'];
+$language1 = explode(",", $language);
 ?>
 
 
@@ -88,14 +91,74 @@ $result = mysqli_fetch_assoc($data);
         <input type="radio" name="r1" value="General" required
         
                 <?php
-                if($result[caste])
+                if($result['caste'] == "General"){
+                        echo "checked";
+                }
                 ?>
 
         ><label style="margin-left: 5px;">General</label>
-        <input type="radio" name="r1" value="OBC" required><label style="margin-left: 5px;">OBC</label>
-        <input type="radio" name="r1" value="SC" required><label style="margin-left: 5px;">SC</label>
-        <input type="radio" name="r1" value="ST" required><label style="margin-left: 5px;">ST</label>
+        <input type="radio" name="r1" value="OBC" required
+        
+        <?php
+                if($result['caste'] == "OBC"){
+                        echo "checked";
+                }
+                ?>
+        
+        ><label style="margin-left: 5px;">OBC</label>
+        <input type="radio" name="r1" value="SC" required
+        
+        <?php
+                if($result['caste'] == "SC"){
+                        echo "checked";
+                }
+                ?>
+
+        ><label style="margin-left: 5px;">SC</label>
+        <input type="radio" name="r1" value="ST" required
+        
+        <?php
+                if($result['caste'] == "ST"){
+                        echo "checked";
+                }
+                ?>
+        
+        ><label style="margin-left: 5px;">ST</label>
 </div>
+
+
+
+<div class="input_field">
+        <label style="margin-right: 100px;">Language</label>
+        <input type="checkbox" name="language[]" value="Hindi" 
+        
+        <?php
+        if(in_array('Hindi' , $language1)){
+        echo "checked";
+                }
+        ?>
+        
+        ><label style="margin-left: 5px;">Hindi</label>
+        <input type="checkbox" name="language[]" value="Gujarati" 
+        
+        <?php
+        if(in_array('Gujarati' , $language1)){
+        echo "checked";
+                }
+        ?>
+        
+        ><label style="margin-left: 5px;">Gujarati</label>
+        <input type="checkbox" name="language[]" value="English" 
+        
+        <?php
+        if(in_array('English' , $language1)){
+        echo "checked";
+                }
+        ?>
+        
+        ><label style="margin-left: 5px;">English</label>
+</div>
+
 
 
 
@@ -133,13 +196,18 @@ if(isset($_POST['update']))
         $gender  = $_POST['gender'];
         $email   = $_POST['email'];
         $phone   = $_POST['phone'];
+        $caste   = $_POST['r1'];
+       
+        $lang   = $_POST['language'];
+        $lang1 = implode(",",$lang);
+
         $address = $_POST['address'];
 
 
       
 
 
-        $query = "update form set fname='$fname', lname='$lname',password='$pwd', cpassword='$cpwd', gender='$gender',email='$email',phone='$phone',address='$address' where id='$id'";
+        $query = "update form set fname='$fname', lname='$lname',password='$pwd', cpassword='$cpwd', gender='$gender',email='$email',phone='$phone',caste='$caste',language='$lang1',address='$address' where id='$id'";
 
         $data = mysqli_query($conn , $query);
 
