@@ -41,8 +41,8 @@ include('connection.php');
         <div class="custom_select">
         <select name="gender" required>
             <option value="">Select</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
+            <option value="male">male</option>
+            <option value="female">female</option>
         </select>
 </div>
 </div>

@@ -8,6 +8,28 @@
          table{
             background : white;
          }
+         .update{
+            background: green;
+            color:white;
+            border:0;
+            outline:none;
+            border-radius:10px;
+            height: 23px;
+            width: 80px;
+            font-weight:bold;
+            cursor: pointer;
+         }
+         .delete{
+            background: red;
+            color:white;
+            border:0;
+            outline:none;
+            border-radius:10px;
+            height: 23px;
+            width: 80px;
+            font-weight:bold;
+            cursor: pointer; 
+         }
 
 
         </style>
@@ -48,18 +70,19 @@ if($total !=0){
 
     <h2 align="center"><mark>Displaying all data</mark></h2>
  <center>
- <table border="3px" cellspacing="7" width="90%"> 
+ <table border="3px" cellspacing="7" width="100%"> 
 
 
 
     <tr>
     <th width="5%">ID</th>
-    <th width="10%">First Name</th>
-    <th width="10%">Last Name</th>
+    <th width="8%">First Name</th>
+    <th width="8%">Last Name</th>
     <th width="10%">Gender</th>
     <th width="20%">Email</th>
     <th width="10%">Phone</th>
-    <th width="25%">Address</th>
+    <th width="24%">Address</th>
+    <th width="15%">Operation</th>
 </tr>
 
 
@@ -73,6 +96,11 @@ if($total !=0){
       <td>".$result['email']."</td>
       <td>".$result['phone']."</td>
       <td>".$result['address']."</td>
+
+      <td>
+      <a href='update_design.php? id=$result[id]'><input type='submit' value='Update' class='update'></a>
+      <a href='delete.php? id=$result[id]'><input type='submit' value='Delete' class='delete' onclick='return checkdelete()'></a>
+      </td>
 </tr>";
     }
 }else{
@@ -85,6 +113,11 @@ if($total !=0){
 ?>
 </table>
 </center>
+<script>
+function checkdelete(){
+    return confirm ('are you sure want to delete the record?');
+}
+
+</script>
 </html>
 
-<!-- echo $result['fname']." - ".$result['lname']." - ".$result['gender']." - ".$result['email']." - ".$result['phone']." - " .$result['address']."<br>"; -->
