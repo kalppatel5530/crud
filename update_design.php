@@ -81,6 +81,24 @@ $result = mysqli_fetch_assoc($data);
         <label>Phone Number</label>
         <input type="text" value="<?php echo $result['phone']; ?>" class="input" name="phone" required>
 </div>
+
+
+<div class="input_field">
+        <label style="margin-right: 100px;">Caste</label>
+        <input type="radio" name="r1" value="General" required
+        
+                <?php
+                if($result[caste])
+                ?>
+
+        ><label style="margin-left: 5px;">General</label>
+        <input type="radio" name="r1" value="OBC" required><label style="margin-left: 5px;">OBC</label>
+        <input type="radio" name="r1" value="SC" required><label style="margin-left: 5px;">SC</label>
+        <input type="radio" name="r1" value="ST" required><label style="margin-left: 5px;">ST</label>
+</div>
+
+
+
 <div class="input_field">
         <label>Address</label>
         <textarea class="textarea" name="address" required>

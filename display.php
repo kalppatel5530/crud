@@ -79,9 +79,11 @@ if($total !=0){
     <th width="8%">First Name</th>
     <th width="8%">Last Name</th>
     <th width="10%">Gender</th>
-    <th width="20%">Email</th>
+    <th width="15%">Email</th>
     <th width="10%">Phone</th>
-    <th width="24%">Address</th>
+    <th width="5%">Caste</th>
+    <th width="10%">Language</th>
+    <th width="14%">Address</th>
     <th width="15%">Operation</th>
 </tr>
 
@@ -95,6 +97,8 @@ if($total !=0){
       <td>".$result['gender']."</td>
       <td>".$result['email']."</td>
       <td>".$result['phone']."</td>
+      <td>".$result['caste']."</td>
+      <td>".$result['language']."</td>
       <td>".$result['address']."</td>
 
       <td>
