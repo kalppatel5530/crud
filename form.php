@@ -15,9 +15,14 @@ include('connection.php');
 </head>
 <body>
     <div class="container">
-        <Form action="" method="POST">
+        <Form action="" method="POST" enctype="multipart/form-data">
         <div class="title">
             Registration Form
+</div>
+<div class="form">
+    <div class="input_field">
+        <label>Upload Image</label>
+        <input type="file" name="uploadfile" style="width:100%;">
 </div>
 <div class="form">
     <div class="input_field">
@@ -93,6 +98,14 @@ include('connection.php');
 
 if(isset($_POST['register']))
 {
+
+$filename = $_FILES["uploadfile"]["name"];
+$tmpname = $_FILES["uploadfile"]["tmp_name"];
+$folder= "images/".$filename ;
+
+move_uploaded_file($tmpname , $folder);
+
+
         $fname   = $_POST['fname'];
         $lname   = $_POST['lname'];
         $pwd     = $_POST['password'];
@@ -113,12 +126,12 @@ if(isset($_POST['register']))
 
         
 
-        $query = "insert into form(fname,lname,password,cpassword,gender,email,phone,caste,language,address) values('$fname','$lname','$pwd','$cpwd','$gender','$email','$phone','$caste','$lang1','$address')";
+        $query = "insert into form(std_img,fname,lname,password,cpassword,gender,email,phone,caste,language,address) values('$folder','$fname','$lname','$pwd','$cpwd','$gender','$email','$phone','$caste','$lang1','$address')";
 
         $data = mysqli_query($conn , $query);
 
         if($data){
-                echo "data inserted succesfully";
+                echo "<script>alert('Data Inserted Succesfully')</script>";
         }else{
                 echo "failed";
         }

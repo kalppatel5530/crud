@@ -76,15 +76,16 @@ if($total !=0){
 
     <tr>
     <th width="5%">ID</th>
-    <th width="8%">First Name</th>
-    <th width="8%">Last Name</th>
+    <th width="3%">Image</th>
+    <th width="10%">First Name</th>
+    <th width="10%">Last Name</th>
     <th width="10%">Gender</th>
-    <th width="15%">Email</th>
+    <th width="10%">Email</th>
     <th width="10%">Phone</th>
-    <th width="5%">Caste</th>
+    <th width="10%">Caste</th>
     <th width="10%">Language</th>
-    <th width="14%">Address</th>
-    <th width="15%">Operation</th>
+    <th width="10%">Address</th>
+    <th width="12%">Operation</th>
 </tr>
 
 
@@ -92,7 +93,10 @@ if($total !=0){
     while($result = mysqli_fetch_assoc($data)){
      echo  " <tr>
        <td>".$result['id']."</td>
-      <td>".$result['fname']."</td>
+       
+       <td><img src='".$result['std_img']."'height='150px' width='150px'></td>
+      
+       <td>".$result['fname']."</td>
       <td>".$result['lname']."</td>
       <td>".$result['gender']."</td>
       <td>".$result['email']."</td>
