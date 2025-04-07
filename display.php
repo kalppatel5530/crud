@@ -1,8 +1,5 @@
 <?php
 session_start();
-echo "welcome" . $_SESSION['user_name'];    
-
-
 ?>
 
 
@@ -38,6 +35,7 @@ echo "welcome" . $_SESSION['user_name'];
             font-weight:bold;
             cursor: pointer; 
          }
+         
 
 
         </style>
@@ -62,7 +60,13 @@ echo "<br>";
 //     echo "record not found";
 // }
 
+$userprofile = $_SESSION['user_name'];
 
+if($userprofile == true){
+
+}else{
+    header('location:login.php');
+}
 
 $query = "select * from form";
 $data = mysqli_query($conn , $query);
@@ -127,6 +131,7 @@ if($total !=0){
 
 
 ?>
+ 
 </table>
 </center>
 <script>
@@ -135,5 +140,6 @@ function checkdelete(){
 }
 
 </script>
+<a href='logout.php'><input type='submit' value='Logout' style="background-color:red; color:white ; height:35px; width:100px; margin-top:20px; font-size:18px; border:0; border-radius: 5px; cursor:pointer;"></a>
 </html>
 

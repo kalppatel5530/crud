@@ -1,8 +1,17 @@
 <?php
 include('connection.php');
-// error_reporting(0);
+error_reporting(0);
+session_start();
 
 $id = $_GET['id'];
+
+$userprofile = $_SESSION['user_name'];
+
+if($userprofile == true){
+
+}else{
+    header('location:login.php');
+}
 
 $query = "select * from form where id='$id'";
 $data = mysqli_query($conn , $query);
