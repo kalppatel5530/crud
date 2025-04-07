@@ -1,3 +1,11 @@
+<?php
+session_start();
+echo "welcome" . $_SESSION['user_name'];    
+
+
+?>
+
+
 <html>
     <head>
         <title>Display</title>

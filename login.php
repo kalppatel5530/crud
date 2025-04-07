@@ -1,3 +1,9 @@
+<?php
+session_start();
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,5 +51,14 @@ if(isset($_POST['login'])){
 
     $total = mysqli_num_rows($data);
     // echo $total;
+
+
+    if($total == 1)
+    {
+      $_SESSION['user_name'] = $username;
+      header('location:display.php');
+    }else{
+      echo "login failed";
+    }
 }
 ?>
