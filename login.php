@@ -31,7 +31,7 @@ session_start();
 </form>
   <script>
     function message(){
-        alert("Pls Password yad karle bhai");
+        alert("Please Password yad karle bhai");
     }
   </script>
 </body>
