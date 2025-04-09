@@ -46,12 +46,12 @@ if (isset($_POST['pwd_reset'])) {
             $mail->Body = "Click the link below to reset your password: <a href='$reset_link'>$reset_link</a>";
 
             $mail->send();
-            echo "<p class='success'>Password reset link has been sent to your email.</p>";
+            echo "<script>alert('Password reset link has been sent to your email.')</script>";
         } catch (Exception $e) {
             echo "<p class='error'>Failed to send email. Mailer Error: {$mail->ErrorInfo}</p>";
         }
     } else {
-        echo "<p class='error'>Email not found!</p>";
+        echo "<script>alert('Email not found!')</script>";
     }
 }
 ?>
