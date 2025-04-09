@@ -22,7 +22,7 @@ include('connection.php');
 <div class="form">
     <div class="input_field">
         <label>Upload Image</label>
-        <input type="file" name="uploadfile" style="width:100%;">
+        <input type="file" name="std_img" style="width:100%;">
 </div>
 <div class="form">
     <div class="input_field">
@@ -87,6 +87,7 @@ include('connection.php');
 <div class="input_field">
     <input type="submit"  name="register" value="register" class="btn" >
 </div>
+<div class="signup">All Ready Registered ? <a href="login.php" class="link">Login Here</a></div>
 </div>
 </form>
 </div>
@@ -99,8 +100,8 @@ include('connection.php');
 if(isset($_POST['register']))
 {
 
-$filename = $_FILES["uploadfile"]["name"];
-$tmpname = $_FILES["uploadfile"]["tmp_name"];
+$filename = $_FILES["std_img"]["name"];
+$tmpname = $_FILES["std_img"]["tmp_name"];
 $folder= "images/".$filename ;
 
 move_uploaded_file($tmpname , $folder);
@@ -131,7 +132,7 @@ move_uploaded_file($tmpname , $folder);
         $data = mysqli_query($conn , $query);
 
         if($data){
-                echo "<script>alert('Data Inserted Succesfully')</script>";
+                echo "<a href='login.php'></a>";
         }else{
                 echo "failed";
         }

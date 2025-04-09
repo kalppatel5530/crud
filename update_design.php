@@ -31,13 +31,19 @@ $language1 = explode(",", $language);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <title>PHP CURD OPERATION</title>
+    <title>Update Detail</title>
 </head>
 <body>
+
     <div class="container">
-        <Form action="" method="POST">
+       <Form action="" method="POST" enctype="multipart/form-data">
         <div class="title">
            Update Student Details
+</div>
+<div class="form">
+    <div class="input_field">
+        <label>Upload Image</label>
+        <input type="file" value="<?php echo $result['std_img']; ?>" name="std_img" style="width:100%;">
 </div>
 <div class="form">
     <div class="input_field">
@@ -48,14 +54,7 @@ $language1 = explode(",", $language);
         <label>Last Name</label>
         <input type="text" value="<?php echo $result['lname']; ?>" class="input" name="lname" required>
 </div>
-<div class="input_field">
-        <label>Password</label>
-        <input type="password" value="<?php echo $result['password']; ?>" class="input" name="password" required>
-</div>
-<div class="input_field">
-        <label>Confirm Password</label>
-        <input type="password" value="<?php echo $result['cpassword']; ?>" class="input" name="conpassword" required>
-</div>
+
 <div class="input_field">
         <label>Gender</label>
         <div class="custom_select">
@@ -198,6 +197,11 @@ $language1 = explode(",", $language);
 
 if(isset($_POST['update']))
 {
+        $filename = $_FILES["std_img"]["name"];
+        $tmpname = $_FILES["std_img"]["tmp_name"];
+        $folder= "images/".$filename;
+        move_uploaded_file($tmpname , $folder);
+        
         $fname   = $_POST['fname'];
         $lname   = $_POST['lname'];
         $pwd     = $_POST['password'];
@@ -216,7 +220,7 @@ if(isset($_POST['update']))
       
 
 
-        $query = "update form set fname='$fname', lname='$lname',password='$pwd', cpassword='$cpwd', gender='$gender',email='$email',phone='$phone',caste='$caste',language='$lang1',address='$address' where id='$id'";
+        $query = "update form set std_img='$folder', fname='$fname', lname='$lname',password='$pwd', cpassword='$cpwd', gender='$gender',email='$email',phone='$phone',caste='$caste',language='$lang1',address='$address' where id='$id'";
 
         $data = mysqli_query($conn , $query);
 

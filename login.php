@@ -21,7 +21,7 @@ session_start();
 <input type="text" name="username" class="textfield" placeholder="Username"><br><br>
 <input type="password" name="password" class="textfield" placeholder="Password">
 
-<div class="forgetpass"><a href="#" class="link" onclick="message()">Forget Password?</a></div>
+<div class="forgetpass"><a href="forgetpassword.php" class="link">Forget Password?</a></div>
 
 <input type="submit" class="btn" name="login" value="Login">
 
@@ -29,11 +29,7 @@ session_start();
 </div>
   </div>
 </form>
-  <script>
-    function message(){
-        alert("Please Password yad karle bhai");
-    }
-  </script>
+ 
 </body>
 </html>
 
