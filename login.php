@@ -1,8 +1,55 @@
 <?php
 session_start();
+include("connection.php");
+
+// Registration logic (executed if form posts with 'register')
+if (isset($_POST['register'])) {
+    $email = trim($_POST['email']);
+    $password = $_POST['password'];
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+    $query = "INSERT INTO form (email, password) VALUES (?, ?)";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "ss", $email, $hashedPassword);
+
+    if (mysqli_stmt_execute($stmt)) {
+        echo "<script>alert('Registration successful. You can now log in.');</script>";
+    } else {
+        echo "<script>alert('Registration failed. Email might already be used.');</script>";
+    }
+}
+
+// Login logic
+if (isset($_POST['login'])) {
+    $email = trim($_POST['email']);
+    $password = trim($_POST['password']);
+
+    $query = "SELECT password FROM form WHERE email = ?";
+    $stmt = mysqli_prepare($conn, $query);
+
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, "s", $email);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+
+        if ($row = mysqli_fetch_assoc($result)) {
+            $hashed_password = $row['password'];
+
+            if (password_verify($password, $hashed_password)) {
+                $_SESSION['user_name'] = $email;
+                header('Location: display.php');
+                exit();
+            } else {
+                echo "<p style='color:red;'>Incorrect Password</p>";
+            }
+        } else {
+            echo "<p style='color:red;'>User Not Found</p>";
+        }
+    } else {
+        echo "<p style='color:red;'>Something went wrong: " . mysqli_error($conn) . "</p>";
+    }
+}
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -13,48 +60,20 @@ session_start();
     <title>Login Page</title>
 </head>
 <body>
-  <div class="center">
-
+<div class="center">
     <h1>Login</h1>
     <form action="" method="POST">
-    <div class="form">
-<input type="text" name="username" class="textfield" placeholder="Username"><br><br>
-<input type="password" name="password" class="textfield" placeholder="Password">
+        <div class="form">
+            <input type="text" name="email" class="textfield" placeholder="Email" required><br><br>
+            <input type="password" name="password" class="textfield" placeholder="Password" required>
 
-<div class="forgetpass"><a href="forgetpassword.php" class="link">Forget Password?</a></div>
+            <div class="forgetpass"><a href="forgetpassword.php" class="link">Forget Password?</a></div>
 
-<input type="submit" class="btn" name="login" value="Login">
+            <input type="submit" class="btn" name="login" value="Login">
 
-<div class="signup">New Member ? <a href="form.php" class="link">SignUp Here</a></div>
+            <div class="signup">New Member ? <a href="form.php" class="link">SignUp Here</a></div>
+        </div>
+    </form>
 </div>
-  </div>
-</form>
- 
 </body>
 </html>
-
-<?php
-include('connection.php');
-
-if(isset($_POST['login'])){
-
-    $username = $_POST['username'];
-    $pwd = $_POST['password'];
-
-    $query="select * from form where email='$username' && password='$pwd'";
-
-    $data = mysqli_query($conn , $query);
-
-    $total = mysqli_num_rows($data);
-    // echo $total;
-
-
-    if($total == 1)
-    {
-      $_SESSION['user_name'] = $username;
-      header('location:display.php');
-    }else{
-      echo "login failed";
-    }
-}
-?>

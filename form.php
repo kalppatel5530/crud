@@ -97,48 +97,52 @@ include('connection.php');
 
 <?php
 
-if(isset($_POST['register']))
-{
-
-$filename = $_FILES["std_img"]["name"];
-$tmpname = $_FILES["std_img"]["tmp_name"];
-$folder= "images/".$filename ;
-
-move_uploaded_file($tmpname , $folder);
-
-
+if (isset($_POST['register'])) {
+        $filename = $_FILES["std_img"]["name"];
+        $tmpname = $_FILES["std_img"]["tmp_name"];
+        $folder = "images/" . $filename;
+    
+        move_uploaded_file($tmpname, $folder);
+    
         $fname   = $_POST['fname'];
         $lname   = $_POST['lname'];
         $pwd     = $_POST['password'];
         $cpwd    = $_POST['conpassword'];
+
+        $hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+
+
         $gender  = $_POST['gender'];
         $email   = $_POST['email'];
         $phone   = $_POST['phone'];
         $caste   = $_POST['r1'];
-        
-        $lang   = $_POST['language'];
-        $lang1 = implode(",",$lang);
-        // echo $lang1;
-
+        $lang    = $_POST['language'];
+        $lang1   = implode(",", $lang);
         $address = $_POST['address'];
-
-
-        if($fname !="" && $lname !="" && $pwd !="" && $cpwd !="" && $gender !="" && $email !="" && $phone !="" && $address !=""){
-
-        
-
-        $query = "insert into form(std_img,fname,lname,password,cpassword,gender,email,phone,caste,language,address) values('$folder','$fname','$lname','$pwd','$cpwd','$gender','$email','$phone','$caste','$lang1','$address')";
-
-        $data = mysqli_query($conn , $query);
-
-        if($data){
-                echo "<a href='login.php'></a>";
-        }else{
-                echo "failed";
+    
+        if ($pwd !== $cpwd) {
+            echo "<script>alert('Password and Confirm Password do not match.')</script>";
+        } elseif (
+            $fname != "" && $lname != "" && $pwd != "" && $cpwd != "" &&
+            $gender != "" && $email != "" && $phone != "" && $address != ""
+        ) {
+            $query = "INSERT INTO form(std_img, fname, lname, password, cpassword, gender, email, phone, caste, language, address) 
+                      VALUES('$folder','$fname','$lname','$hashed_password','$hashed_password','$gender','$email','$phone','$caste','$lang1','$address')";
+    
+            $data = mysqli_query($conn, $query);
+    
+            if ($data) {
+                echo "<script>alert('Registration successful!'); window.location.href='login.php';</script>";
+            } else {
+                echo "<script>alert('Failed to register.')</script>";
+            }
+        } else {
+            echo "<script>alert('Please fill all the required fields.')</script>";
         }
-}else{
-        echo "<script>alert('Please Fill The Form')</script>";
-}
-}
+    }
+    
+
+
+
 
 ?>
