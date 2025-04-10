@@ -24,7 +24,9 @@ if (isset($_POST['login'])) {
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
 
-    $query = "SELECT password FROM form WHERE email = ?";
+    $query = "SELECT password, user_name FROM form WHERE email = ?";
+
+
     $stmt = mysqli_prepare($conn, $query);
 
     if ($stmt) {
@@ -33,12 +35,14 @@ if (isset($_POST['login'])) {
         $result = mysqli_stmt_get_result($stmt);
 
         if ($row = mysqli_fetch_assoc($result)) {
-            $hashed_password = $row['password'];
+            $hashedPassword = $row['password'];
 
-            if (password_verify($password, $hashed_password)) {
-                $_SESSION['user_name'] = $email;
+            if (password_verify($password, $hashedPassword)) {
+                // Set session variable and redirect
+                $_SESSION['user_name'] = $row['user_name']; // Store email in session instead
+
                 header('Location: display.php');
-                exit();
+                exit(); // Always call exit after header redirect
             } else {
                 echo "<p style='color:red;'>Incorrect Password</p>";
             }
@@ -49,6 +53,7 @@ if (isset($_POST['login'])) {
         echo "<p style='color:red;'>Something went wrong: " . mysqli_error($conn) . "</p>";
     }
 }
+
 ?>
 
 <!DOCTYPE html>

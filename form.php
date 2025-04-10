@@ -34,6 +34,11 @@ include('connection.php');
         <input type="text" class="input" name="lname" required>
 </div>
 <div class="input_field">
+        <label>User Name</label>
+        <input type="text" name="user_name" class="input" required><br><br>
+
+</div>
+<div class="input_field">
         <label>Password</label>
         <input type="password" class="input" name="password" required>
 </div>
@@ -102,14 +107,22 @@ if (isset($_POST['register'])) {
         $tmpname = $_FILES["std_img"]["tmp_name"];
         $folder = "images/" . $filename;
     
-        move_uploaded_file($tmpname, $folder);
+        $allowed_extensions = ['jpg', 'jpeg', 'png', 'gif'];
+$file_ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+
+if (!in_array($file_ext, $allowed_extensions)) {
+    echo "<script>alert('Invalid file type. Only JPG, JPEG, PNG, and GIF are allowed.')</script>";
+} else {
+    move_uploaded_file($tmpname, $folder);
     
         $fname   = $_POST['fname'];
         $lname   = $_POST['lname'];
+        $uname   = $_POST['user_name'];
+
         $pwd     = $_POST['password'];
         $cpwd    = $_POST['conpassword'];
 
-        $hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $hashedPassword = password_hash($pwd, PASSWORD_DEFAULT);
 
 
         $gender  = $_POST['gender'];
@@ -122,12 +135,15 @@ if (isset($_POST['register'])) {
     
         if ($pwd !== $cpwd) {
             echo "<script>alert('Password and Confirm Password do not match.')</script>";
+        } elseif (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/', $pwd)) {
+            echo "<script>alert('Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number, 1 special character and be at least 8 characters long.')</script>";
         } elseif (
             $fname != "" && $lname != "" && $pwd != "" && $cpwd != "" &&
             $gender != "" && $email != "" && $phone != "" && $address != ""
         ) {
-            $query = "INSERT INTO form(std_img, fname, lname, password, cpassword, gender, email, phone, caste, language, address) 
-                      VALUES('$folder','$fname','$lname','$hashed_password','$hashed_password','$gender','$email','$phone','$caste','$lang1','$address')";
+        
+            $query = "INSERT INTO form(std_img, fname, lname,user_name, password, cpassword, gender, email, phone, caste, language, address) 
+                      VALUES('$folder','$fname','$lname','$uname','$hashedPassword','$cpwd','$gender','$email','$phone','$caste','$lang1','$address')";
     
             $data = mysqli_query($conn, $query);
     
@@ -141,7 +157,7 @@ if (isset($_POST['register'])) {
         }
     }
     
-
+}
 
 
 

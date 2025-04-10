@@ -1,5 +1,6 @@
 <?php
 session_start();
+echo "Welcome " .$_SESSION['user_name'];
 ?>
 
 
@@ -91,6 +92,7 @@ if($total !=0){
     <th width="3%">Image</th>
     <th width="10%">First Name</th>
     <th width="10%">Last Name</th>
+    <th width="10%">User Name</th>
     <th width="10%">Gender</th>
     <th width="10%">Email</th>
     <th width="10%">Phone</th>
@@ -110,6 +112,7 @@ if($total !=0){
       
        <td>".$result['fname']."</td>
       <td>".$result['lname']."</td>
+      <td>".$result['user_name']."</td>
       <td>".$result['gender']."</td>
       <td>".$result['email']."</td>
       <td>".$result['phone']."</td>
