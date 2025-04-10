@@ -24,7 +24,7 @@ if (isset($_POST['login'])) {
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
 
-    $query = "SELECT password, user_name FROM form WHERE email = ?";
+    $query = "SELECT password, email FROM form WHERE email = ?";
 
 
     $stmt = mysqli_prepare($conn, $query);

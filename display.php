@@ -1,6 +1,7 @@
 <?php
-session_start();
-echo "Welcome " .$_SESSION['user_name'];
+include('session.php');
+require_login();
+echo "Welcome " .$_SESSION['user_email'];
 ?>
 
 
@@ -61,13 +62,7 @@ echo "<br>";
 //     echo "record not found";
 // }
 
-$userprofile = $_SESSION['user_name'];
-
-if($userprofile == true){
-
-}else{
-    header('location:login.php');
-}
+// Session validation now handled by require_login() from session.php
 
 $query = "select * from form";
 $data = mysqli_query($conn , $query);
