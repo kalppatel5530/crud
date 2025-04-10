@@ -54,6 +54,11 @@ $language1 = explode(",", $language);
         <label>Last Name</label>
         <input type="text" value="<?php echo $result['lname']; ?>" class="input" name="lname" required>
 </div>
+<div class="input_field">
+        <label>User Name</label>
+        <input type="text" value="<?php echo $result['user_name']; ?>" name="user_name" class="input" required><br><br>
+
+</div>
 
 <div class="input_field">
         <label>Gender</label>
@@ -204,8 +209,9 @@ if(isset($_POST['update']))
         
         $fname   = $_POST['fname'];
         $lname   = $_POST['lname'];
-        $pwd     = $_POST['password'];
-        $cpwd    = $_POST['conpassword'];
+        $uname   = $_POST['user_name'];
+
+       
         $gender  = $_POST['gender'];
         $email   = $_POST['email'];
         $phone   = $_POST['phone'];
@@ -220,7 +226,7 @@ if(isset($_POST['update']))
       
 
 
-        $query = "update form set std_img='$folder', fname='$fname', lname='$lname',password='$pwd', cpassword='$cpwd', gender='$gender',email='$email',phone='$phone',caste='$caste',language='$lang1',address='$address' where id='$id'";
+        $query = "update form set std_img='$folder', fname='$fname', lname='$lname',user_name='$uname', gender='$gender',email='$email',phone='$phone',caste='$caste',language='$lang1',address='$address' where id='$id'";
 
         $data = mysqli_query($conn , $query);
 
