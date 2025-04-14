@@ -10,7 +10,7 @@ $userprofile = $_SESSION['user_name'];
 if($userprofile == true){
 
 }else{
-    header('location:login.php');
+    header('location:update_design.php');
 }
 
 $query = "select * from form where id='$id'";

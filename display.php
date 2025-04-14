@@ -1,7 +1,7 @@
 <?php
 include('session.php');
-require_login();
-echo "Welcome " .$_SESSION['user_email'];
+error_reporting(0);
+echo "Welcome " .$_SESSION['user_name'];
 ?>
 
 
